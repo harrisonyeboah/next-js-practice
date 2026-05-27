@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 export default async function Reviews({ params }: { params: Promise<{ slug: string[] }> }) {
     // lib/data.ts
     const movies = [
@@ -33,10 +35,11 @@ export default async function Reviews({ params }: { params: Promise<{ slug: stri
                 ))}
             </div>
         );
-    } else {
+    } else if (slug.length === 3) {
+        const [genre, id, year] = slug;
         return (
             <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-                {movies.map((movie) => (
+                {movies.filter(movie => movie.genre === genre && movie.id === id && movie.year === parseInt(year)).map((movie) => (
                     <div key={movie.id} className="border p-4 m-2 w-full max-w-md">
                         <h2 className="text-xl font-bold">{movie.title}</h2>
                         <p>Genre: {movie.genre}</p>
@@ -45,5 +48,7 @@ export default async function Reviews({ params }: { params: Promise<{ slug: stri
                 ))}
             </div>
         );
+    } else {
+        notFound();
     }
 }

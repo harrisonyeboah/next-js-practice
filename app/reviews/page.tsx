@@ -1,3 +1,5 @@
+
+
 export default async function Reviews() {
     // lib/data.ts
     const movies = [

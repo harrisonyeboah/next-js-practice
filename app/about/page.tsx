@@ -9,3 +9,5 @@ export default function About() {
     </div>
   );
 }
+
+// This is in an auth group
