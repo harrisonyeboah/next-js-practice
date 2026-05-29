@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 import Link from 'next/link'
 
 const geistSans = Geist({
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
   description: "This is an AI Planner built with Next.js and OpenAI's API.",
 };
 
-export default function RootLayout({
+export default function BlogLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -30,9 +29,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <nav>
-          <Link href='/'>Home</Link>
-          <Link href='/blog'>Blog</Link>
-          <Link href='/dashboard'>Dashboard</Link>
+          <Link href='/blog/javascript'>JavaScript</Link>
+          <Link href='/blog/css'>CSS</Link>
+          <Link href='/dashboard/devops'>DevOps</Link>
         </nav>
 
         <main className="flex-1">
