@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+
+model Customer { 
+  id    Int     @id @default(autoincrement()) 
+  firstName String
+  lastName String
+  accounts Account[]
+} 
+model Account { 
+  id        Int     @id @default(autoincrement()) 
+  accountNumber  Int   @default(dbgenerated("floor(random() * (999999 - 100000 + 1) + 100000)::int"))
+  customerName Customer @relation(fields: [customerId], references: [id])
+  balance Int
+  accountType AccountType 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email String  @unique
+  customerId Int
+} 
+
+enum AccountType {
+  CHECKINGS
+  SAVINGS
+}
